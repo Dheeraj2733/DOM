@@ -1,6 +1,7 @@
 let students = JSON.parse(localStorage.getItem("students")) || [];
         
         function addStudent() {
+               // Get input values
             let name = document.getElementById("name").value.trim();
             let id = document.getElementById("id").value.trim();
             let email = document.getElementById("email").value.trim();
@@ -14,7 +15,7 @@ let students = JSON.parse(localStorage.getItem("students")) || [];
                 alert("Contact number must be exactly 10 digits");
                 return;
             }
-            
+            // Add new student to the list
             students.push({ name, id, email, contact });
             localStorage.setItem("students", JSON.stringify(students));
             renderStudents();
@@ -44,19 +45,21 @@ let students = JSON.parse(localStorage.getItem("students")) || [];
         }
         
         function deleteStudent(index) {
+            // Remove student from list
             students.splice(index, 1);
             localStorage.setItem("students", JSON.stringify(students));
             renderStudents();
         }
         
         function editStudent(index) {
+               // Populate input fields with selected student data
             let student = students[index];
             document.getElementById("name").value = student.name;
             document.getElementById("id").value = student.id;
             document.getElementById("email").value = student.email;
             document.getElementById("contact").value = student.contact;
             
-            deleteStudent(index);
+            deleteStudent(index);// Remove student from list before editing
         }
         
         renderStudents();
